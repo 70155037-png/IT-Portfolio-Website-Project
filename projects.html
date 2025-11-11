@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Aiza Tahir Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#4F46E5', // Indigo
+                        'secondary': '#1F2937', // Dark Gray/Slate
+                        'background': '#030712', // Near-black
+                        'text-light': '#F9FAFB',
+                        'text-muted': '#D1D5DB',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        main > section {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .nav-link:hover {
+            color: #ffffff;
+            background-color: #4F46E5;
+        }
+        .active-link {
+            border-bottom: 2px solid #4F46E5;
+            color: #F9FAFB !important;
+        }
+    </style>
+</head>
+<body class="bg-background text-text-light font-sans min-h-screen">
+
+    <header class="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-secondary shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-extrabold text-primary hover:text-text-light transition-colors duration-300">
+                A. Tahir
+            </a>
+            
+            <nav id="desktop-nav" class="hidden md:flex space-x-6">
+                <a href="index.html" class="nav-link text-text-muted hover:text-primary transition-colors duration-300 px-3 py-2 rounded-lg">Home</a>
+                <a href="projects.html" class="nav-link active-link text-text-light px-3 py-2 rounded-lg">Projects</a>
+                <a href="skills.html" class.="nav-link text-text-muted hover:text-primary transition-colors duration-300 px-3 py-2 rounded-lg">Skills & Experience</a>
+                <a href="contact.html" class="nav-link text-text-muted hover:text-primary transition-colors duration-300 px-3 py-2 rounded-lg">Contact</a>
+            </nav>
+
+            <button id="mobile-menu-btn" class="md:hidden text-text-light focus:outline-none p-2 rounded-md hover:bg-secondary transition-colors duration-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+
+        <nav id="mobile-menu" class="md:hidden hidden border-t border-secondary">
+            <a href="index.html" class="nav-link block px-4 py-3 text-text-light hover:bg-secondary/50 transition-colors duration-300">Home</a>
+            <a href="projects.html" class="nav-link active-link block px-4 py-3 text-text-light hover:bg-secondary/50 transition-colors duration-300">Projects</a>
+            <a href="skills.html" class="nav-link block px-4 py-3 text-text-light hover:bg-secondary/50 transition-colors duration-300">Skills & Experience</a>
+            <a href="contact.html" class="nav-link block px-4 py-3 text-text-light hover:bg-secondary/50 transition-colors duration-300">Contact</a>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <section>
+            <h1 class="text-4xl font-bold mb-8 border-b border-primary pb-3">Featured Projects</h1>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-secondary p-6 rounded-xl shadow-2xl transition duration-500 hover:shadow-primary/50 hover:scale-[1.02]">
+                    <h2 class="text-2xl font-bold text-primary mb-2">DevConnect Social Platform</h2>
+                    <span class="inline-block text-sm text-text-muted bg-background px-3 py-1 rounded-full mb-3">MERN Stack, Realtime Communication</span>
+                    <p class="text-text-muted mb-4">A social networking platform built for developers, featuring real-time chat, code snippet sharing, and user-generated content feeds. Implemented robust authorization and a highly scalable MongoDB cluster.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" target="_blank" class="text-text-light hover:text-primary transition-colors duration-300 flex items-center">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            Live Demo
+                        </a>
+                        <a href="#" target="_blank" class="text-text-light hover:text-primary transition-colors duration-300 flex items-center">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                            Code Repo
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-secondary p-6 rounded-xl shadow-2xl transition duration-500 hover:shadow-primary/50 hover:scale-[1.02]">
+                    <h2 class="text-2xl font-bold text-primary mb-2">FinTrack Budget App</h2>
+                    <span class="inline-block text-sm text-text-muted bg-background px-3 py-1 rounded-full mb-3">React, TypeScript, D3.js</span>
+                    <p class="text-text-muted mb-4">A personal finance tracker utilizing TypeScript for type safety and D3.js for complex data visualization of spending habits and trends over time.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" target="_blank" class="text-text-light hover:text-primary transition-colors duration-300 flex items-center">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            Live Demo
+                        </a>
+                        <a href="#" target="_blank" class="text-text-light hover:text-primary transition-colors duration-300 flex items-center">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                            Code Repo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-12 py-6 border-t border-secondary text-center text-text-muted">
+        <p>&copy; 2025 Aiza Tahir. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            // --- Mobile Menu Toggle ---
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
