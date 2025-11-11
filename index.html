@@ -34,12 +34,28 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .nav-link:hover {
-            color: #ffffff;
-            background-color: #4F46E5;
+            color: #ffffff !important;
+            background-color: #4F46E5 !important;
+        }
+        /* show blue while the link is being pressed or focused via keyboard */
+        .nav-link:active,
+        .nav-link:focus-visible {
+            color: #ffffff !important;
+            background-color: #4F46E5 !important;
+            outline: none;
         }
         .active-link {
             border-bottom: 2px solid #4F46E5;
             color: #F9FAFB !important;
+            background-color: #4F46E5 !important;
+        }
+        /* explicit blue hover shadow (site-wide) */
+        .hover-blue-shadow {
+            transition: box-shadow 200ms ease, transform 200ms ease;
+        }
+        .hover-blue-shadow:hover {
+            box-shadow: 0 20px 40px rgba(79,70,229,0.25);
+            transform: translateZ(0);
         }
     </style>
 </head>
@@ -52,7 +68,7 @@
             </a>
             
             <nav id="desktop-nav" class="hidden md:flex space-x-6">
-                <a href="index.html" class="nav-link active-link text-text-light px-3 py-2 rounded-lg">Home</a>
+                <a href="index.html" class="nav-link text-text-muted hover:text-primary transition-colors duration-300 px-3 py-2 rounded-lg">Home</a>
                 <a href="projects.html" class="nav-link text-text-muted hover:text-primary transition-colors duration-300 px-3 py-2 rounded-lg">Projects</a>
                 <a href="skills.html" class="nav-link text-text-muted hover:text-primary transition-colors duration-300 px-3 py-2 rounded-lg">Skills & Experience</a>
                 <a href="contact.html" class="nav-link text-text-muted hover:text-primary transition-colors duration-300 px-3 py-2 rounded-lg">Contact</a>
@@ -64,7 +80,7 @@
         </div>
 
         <nav id="mobile-menu" class="md:hidden hidden border-t border-secondary">
-            <a href="index.html" class="nav-link active-link block px-4 py-3 text-text-light hover:bg-secondary/50 transition-colors duration-300">Home</a>
+            <a href="index.html" class="nav-link block px-4 py-3 text-text-light hover:bg-secondary/50 transition-colors duration-300">Home</a>
             <a href="projects.html" class="nav-link block px-4 py-3 text-text-light hover:bg-secondary/50 transition-colors duration-300">Projects</a>
             <a href="skills.html" class="nav-link block px-4 py-3 text-text-light hover:bg-secondary/50 transition-colors duration-300">Skills & Experience</a>
             <a href="contact.html" class="nav-link block px-4 py-3 text-text-light hover:bg-secondary/50 transition-colors duration-300">Contact</a>
@@ -82,8 +98,8 @@
                     Information Technology Engineer | Programmer
                 </p>
                 <div class="space-x-4">
-                    <a href="projects.html" class="inline-block bg-primary text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-primary/90 transition duration-300 transform hover:scale-105">View Projects</a>
-                    <a href="contact.html" class="inline-block border border-primary text-primary font-bold py-3 px-8 rounded-full hover:bg-primary/20 transition duration-300 transform hover:scale-105">Get In Touch</a>
+                    <a href="projects.html" class="inline-block bg-primary text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-primary/90 transition duration-300 transform hover:scale-105 hover-blue-shadow">View Projects</a>
+                    <a href="contact.html" class="inline-block border border-primary text-primary font-bold py-3 px-8 rounded-full hover:bg-primary/20 transition duration-300 transform hover:scale-105 hover-blue-shadow">Get In Touch</a>
                 </div>
             </div>
             
@@ -110,6 +126,51 @@
             mobileMenuBtn.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
+
+            // --- Auto-set active nav link (desktop + mobile) ---
+            (function setActiveNav() {
+                try {
+                    const path = window.location.pathname.split('/').pop() || 'index.html';
+                    const navLinks = document.querySelectorAll('header a.nav-link');
+                    navLinks.forEach(a => {
+                        const href = a.getAttribute('href');
+                        if (!href) return;
+                        // Normalize index paths
+                        const hrefFile = href.split('/').pop();
+                        if (hrefFile === path) {
+                            a.classList.add('active-link');
+                            // Ensure text color utilities reflect the active state
+                            a.classList.remove('text-text-muted');
+                            a.classList.add('text-text-light');
+                        } else {
+                            a.classList.remove('active-link');
+                        }
+                    });
+                    // If user clicks a nav link that points to the current page, flash the active style briefly
+                    document.querySelectorAll('header a.nav-link').forEach(a => {
+                        a.addEventListener('click', (e) => {
+                            try {
+                                const hrefFile = (a.getAttribute('href') || '').split('/').pop();
+                                const pathNow = window.location.pathname.split('/').pop() || 'index.html';
+                                if (hrefFile === pathNow) {
+                                    // prevent reload and flash style
+                                    e.preventDefault();
+                                    a.classList.add('active-link');
+                                    a.classList.remove('text-text-muted');
+                                    a.classList.add('text-text-light');
+                                    setTimeout(() => {
+                                        a.classList.remove('active-link');
+                                    }, 250);
+                                }
+                            } catch (err) {
+                                // ignore
+                            }
+                        });
+                    });
+                } catch (err) {
+                    console.error('setActiveNav error', err);
+                }
+            })();
         });
     </script>
 </body>
